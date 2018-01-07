@@ -3,11 +3,11 @@ services:
   feedbacks:
     build: .
     ports:
-      - 8088:8088
+      - 8090:8090
     environment:
       KUMULUZEE_CONFIG_ETCD_HOSTS: http://etcd:2379
       KUMULUZEE_DISCOVERY_ETCD_HOSTS: http://etcd:2379
-      KUMULUZEE_SERVER_BASEURL: http://feedbacks:8088
+      KUMULUZEE_SERVER_BASEURL: http://feedbacks:8090
     depends_on:
       - etcd
 

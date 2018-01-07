@@ -20,7 +20,7 @@ spec:
           - name: KUMULUZEE_CONFIG_ETCD_HOSTS
             value: http://etcd:2379
           - name: KUMULUZEE_SERVER_BASEURL
-            value: http://feedbacks:8088
+            value: http://feedbacks:8090
         livenessProbe:
           httpGet:
             path: /health
@@ -28,9 +28,9 @@ spec:
           initialDelaySeconds: 20
           periodSeconds: 3
         ports:
-        - containerPort: 8088
+        - containerPort: 8090
           name: server
           protocol: TCP
         resources:
           requests:
-            cpu: 250m
+            cpu: 150m
