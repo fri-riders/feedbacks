@@ -2,6 +2,8 @@ package com.fri.rso.fririders.feedbacks.services;
 
 
 
+import com.fri.rso.fririders.feedbacks.database.Database;
+import com.fri.rso.fririders.feedbacks.entities.Feedback;
 import com.fri.rso.fririders.feedbacks.entities.User;
 import com.kumuluz.ee.discovery.annotations.DiscoverService;
 import com.kumuluz.ee.logs.LogManager;
@@ -30,9 +32,27 @@ public class FeedbacksBean {
     @Inject
     private AuthBean authBean;
 
-    @Inject
-    @DiscoverService(value="display-bookings", version = "1.0.x", environment = "dev")
-    private Optional<String> bookingsUrl;
+    public List<Feedback> getAccommodationFeedbacks(long aId){
+        List<Feedback> feedbacks = Database.getFeedbacks();
+        List<Feedback> accFeedbacks = new ArrayList<>();
+        for (Feedback f : feedbacks){
+            if(f.getAccommodationId() == aId)
+                accFeedbacks.add(f);
+        }
+        return accFeedbacks;
+    }
 
-    private String accommodationsUrl = "http://accommodations:8081/v1/accommodations";
+    public List<Feedback> getUserFeedbacks(String uId){
+        List<Feedback> feedbacks = Database.getFeedbacks();
+        List<Feedback> usrFeedbacks = new ArrayList<>();
+        for (Feedback f : feedbacks){
+            if(f.getUserId().equals(uId))
+                usrFeedbacks.add(f);
+        }
+        return usrFeedbacks;
+    }
+
+    public void addAccommodationFeedback(Feedback f) throws Exception{
+        Database.addFeedback(f);
+    }
 }
